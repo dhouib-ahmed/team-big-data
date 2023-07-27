@@ -2,16 +2,16 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: bitnami
+  name: nginx
   namespace: default
 spec:
   interval: 1m0s
-  url: https://charts.bitnami.com/bitnami
+  url:  https://helm.nginx.com/stable
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: nginx
+  name: nginx-ingress
   namespace: default
 spec:
   interval: 1m0s
@@ -20,9 +20,9 @@ spec:
       chart: nginx
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: nginx
         namespace: default
-      version: "9.3.3"
+      version: "0.17.1"
   install:
     remediation:
       retries: 3
